@@ -1,3 +1,39 @@
+To save the image of a running container
+docker commit <container> <image-name>
+
+Go faster: 
+kubectl create deploy my-deploy --image=nginx --port=8081 --dry-run=client -o yaml > deploy.yml
+kubectl set selector svc [service name] 'role=green'
+
+Tasks:
+-> Create a deployment:
+	k create deploy nginx-deploy --image=nginx:stable-alpine --replicas=4 --port=80
+-> Create a nodePort
+	k expose deploy nginx-deploy --port=9000 --target-port=80 --type=NodePort --name=nginx-svc
+-> Scale Deployment:
+	k scale deploy stable-deployment --replicas=2
+
+Key kubectl Commands to know for the exam
+	k create deploy [deployment-name] --image=[image-name]:[tag] --dry-run=client -o yaml > deploy.yaml
+	k set image deploy [deployment-name] [image-name]
+add a new annotation to a deployment
+	k annotate deploy [deployment-name] [annotation-name]="[annotation-value]" --overwrite=true
+display a specific annotation
+	k  get deploy web-app -o json | jq '.metadata.annotations."kubernetes.io/change-cause"'
+
+To rollback to a specific deployment revision
+	k rollout undo -f deploy.yaml
+Rollback to a specific revision
+	k rollout undo -f deploy.yaml --to-revision=2
+
+
+
+
+
+
+
+
+
 https://www.youtube.com/watch?v=k1EjV9Vw_0s&ab_channel=WSO2
 
 https://drive.google.com/file/d/1zV1pM2cvxPV8pO5fkkx914aCc_y6Z1zN/view?usp=sharing
