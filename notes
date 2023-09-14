@@ -26,7 +26,10 @@ Rollback to a specific revision
 
 
 
-
+spring.datasource.url=jdbc:postgresql://ami_wso_as_is_db
+logging.level.liquibase = debug
+spring.datasource.username=wso_as_is_user
+spring.datasource.password=b(txVcs6a%a^EfQi
 
 
 
