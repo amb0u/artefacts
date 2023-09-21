@@ -25,6 +25,11 @@ Rollback to a specific revision
 	k rollout undo -f deploy.yaml --to-revision=2
 
 
+ami_wso_as_is_db
+logging.level.liquibase = debug
+spring.datasource.username=wso_as_is_user
+spring.datasource.password=b(txVcs6a%a^EfQi
+
 
 
 https://www.youtube.com/watch?v=k1EjV9Vw_0s&ab_channel=WSO2
