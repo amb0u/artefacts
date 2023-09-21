@@ -25,12 +25,6 @@ Rollback to a specific revision
 	k rollout undo -f deploy.yaml --to-revision=2
 
 
-spring.datasource.url=jdbc:postgresql://identity_db_hf-ami_af740_dev.fr.world.socgen:12400/ami_wso_as_is_db
-logging.level.liquibase = debug
-spring.datasource.username=wso_as_is_user
-spring.datasource.password=b(txVcs6a%a^EfQi
-
-
 https://www.youtube.com/watch?v=k1EjV9Vw_0s&ab_channel=WSO2
 
 https://drive.google.com/file/d/1zV1pM2cvxPV8pO5fkkx914aCc_y6Z1zN/view?usp=sharing
