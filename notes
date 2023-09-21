@@ -29,7 +29,6 @@ ami_wso_as_is_db
 logging.level.liquibase = debug
 spring.datasource.username=wso_as_is_user
 spring.datasource.password=b(txVcs6a%a^EfQi
-postgresql://wso_as_is_user:********@identity_db_hf-ami_af740_dev.fr.world.socgen:12400/ami_wso_as_is_db
 
 
 https://www.youtube.com/watch?v=k1EjV9Vw_0s&ab_channel=WSO2
