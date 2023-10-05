@@ -1,0 +1,59 @@
+Checking for latest update tool version
+-------------- Welcome to WSO2 Updates --------------
+
+Fixing merge conflicts
+/home/ambroise/wso2am-3.0.0/repository/deployment/server/webapps/authenticationendpoint/dynamic_prompt.jsp.final
+/home/ambroise/wso2am-3.0.0/repository/deployment/server/webapps/accountrecoveryendpoint/username-recovery.jsp.final
+/home/ambroise/wso2am-3.0.0/repository/deployment/server/webapps/accountrecoveryendpoint/password-recovery.jsp.final
+/home/ambroise/wso2am-3.0.0/repository/deployment/server/jaggeryapps/publisher/site/public/theme/settings.js.final
+wso2update: Conflicts for the above files are not resolved.
+Please resolve the conflicts and run the update command with --continue flag.
+
+
+
+To save the image of a running container
+docker commit <container> <image-name>
+
+Tasks:
+-> Create a deployment:
+	k create deploy nginx-deploy --image=nginx:stable-alpine --replicas=4 --port=80
+-> Create a nodePort
+	k expose deploy nginx-deploy --port=9000 --target-port=80 --type=NodePort --name=nginx-svc
+-> Scale Deployment:
+	k scale deploy stable-deployment --replicas=2
+Go faster: 
+	kubectl create deploy my-deploy --image=nginx --port=8081 --dry-run=client -o yaml > deploy.yml
+	kubectl set selector svc [service name] 'role=green'
+Key kubectl Commands to know for the exam
+	k create deploy [deployment-name] --image=[image-name]:[tag] --dry-run=client -o yaml > deploy.yaml
+	k set image deploy [deployment-name] [image-name]
+add a new annotation to a deployment
+	k annotate deploy [deployment-name] [annotation-name]="[annotation-value]" --overwrite=true
+display a specific annotation
+	k  get deploy web-app -o json | jq '.metadata.annotations."kubernetes.io/change-cause"'
+
+To rollback to a specific deployment revision
+	k rollout undo -f deploy.yaml
+Rollback to a specific revision
+	k rollout undo -f deploy.yaml --to-revision=2
+
+
+https://www.youtube.com/watch?v=k1EjV9Vw_0s&ab_channel=WSO2
+
+https://drive.google.com/file/d/1zV1pM2cvxPV8pO5fkkx914aCc_y6Z1zN/view?usp=sharing
+
+https://drive.google.com/file/d/1YAi5R1CTW0p2kw9CSAQC6iUHPr7ST90r/view?usp=sharing
+
+https://drive.google.com/file/d/1PX_AZpaV6ALe0R1PMZb22s2BA8TFBNi7/view?usp=sharing
+
+https://drive.google.com/file/d/1EJzr8zTqgza6LHor7CeVGXOGVUurL8dX/view?usp=sharing
+
+https://drive.google.com/file/d/1kvv2VfSQXUfXfpHggH8oNYgbIj8R-WMQ/view?usp=sharing
+
+https://drive.google.com/file/d/1SE1-5luz52-XgH2EdgPLJp7uHzluxwoU/view?usp=sharing
+
+https://drive.google.com/file/d/1r7M16tJZWSLpblgTRszZeqCcaN1HSJKo/view?usp=sharing
+
+https://drive.google.com/file/d/1QJPafuPscgkUp0vvm_DS7lmlCONhnkPk/view?usp=sharing
+
+https://drive.google.com/file/d/1s9StMoYt-v0LyTBdjcv78YY7z41sZjrr/view?usp=sharing
