@@ -1,3 +1,33 @@
+---
+- name: Delete User and Associated Processes
+  hosts: your_target_hosts
+  become: yes  # Run tasks with elevated privileges
+
+  tasks:
+    - name: Identify processes using the user
+      shell: "pkill -u {{ username }}"
+      ignore_errors: yes  # Ignore errors if no processes are found
+
+    - name: Wait for processes to terminate
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: 5
+      delay: 5
+      loop: "{{ ansible_jobs.keys() | list }}"
+
+    - name: Switch to another user
+      become_user: other_username
+      command: echo "Switched to other user"
+
+    - name: Delete the user
+      user:
+        name: "{{ username }}"
+        state: absent
+        remove: yes
+
+
 To save the image of a running container
 docker commit <container> <image-name>
 
