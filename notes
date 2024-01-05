@@ -1,30 +1,11 @@
-#!/bin/bash
+# Run elasticsearch-setup-passwords with auto option using expect
+expect <<EOF
+spawn "${ELASTICSEARCH_BIN_DIR}/elasticsearch-setup-passwords" auto
+expect "Proceed with the operation"
+send "y\r"
+expect eof
+EOF
 
-# Replace with the actual path to your Elasticsearch bin directory
-ELASTICSEARCH_BIN_DIR="/path/to/your/elasticsearch/bin"
-
-# Run elasticsearch-setup-passwords with auto option
-passwords_output=$("${ELASTICSEARCH_BIN_DIR}/elasticsearch-setup-passwords" auto)
-
-# Extract passwords from the output
-elastic_password=$(echo "${passwords_output}" | grep '^PASSWORD elastic =' | awk '{print $4}')
-kibana_password=$(echo "${passwords_output}" | grep '^PASSWORD kibana =' | awk '{print $4}')
-logstash_password=$(echo "${passwords_output}" | grep '^PASSWORD logstash =' | awk '{print $4}')
-
-# Set environment variables
-export ELASTICSEARCH_USER="elastic"
-export ELASTICSEARCH_PASSWORD="${elastic_password}"
-
-export KIBANA_USER="kibana"
-export KIBANA_PASSWORD="${kibana_password}"
-
-export LOGSTASH_USER="logstash"
-export LOGSTASH_PASSWORD="${logstash_password}"
-
-# Display the generated passwords
-echo "Elasticsearch User: ${ELASTICSEARCH_USER}, Password: ${ELASTICSEARCH_PASSWORD}"
-echo "Kibana User: ${KIBANA_USER}, Password: ${KIBANA_PASSWORD}"
-echo "Logstash User: ${LOGSTASH_USER}, Password: ${LOGSTASH_PASSWORD}"
 
 
 
