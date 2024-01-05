@@ -1,28 +1,31 @@
----
-- name: Generate Elasticsearch passwords
-  hosts: localhost
-  gather_facts: false
-  vars:
-    elasticsearch_home: "/path/to/your/elasticsearch"
-    elastic_password_variable: "elastic_password"
-    kibana_password_variable: "kibana_password"
+#!/bin/bash
 
-  tasks:
-    - name: Run elasticsearch-setup-passwords
-      command: "{{ elasticsearch_home }}/bin/elasticsearch-setup-passwords auto"
-      register: password_generation_output
+# Replace with the actual path to your Elasticsearch bin directory
+ELASTICSEARCH_BIN_DIR="/path/to/your/elasticsearch/bin"
 
-    - name: Extract passwords from output
-      set_fact:
-        {{ elastic_password_variable }}: "{{ password_generation_output.stdout_lines | regex_search('^PASSWORD elastic = (.+)$', '\\1') }}"
-        {{ kibana_password_variable }}: "{{ password_generation_output.stdout_lines | regex_search('^PASSWORD kibana = (.+)$', '\\1') }}"
+# Run elasticsearch-setup-passwords with auto option
+passwords_output=$("${ELASTICSEARCH_BIN_DIR}/elasticsearch-setup-passwords" auto)
 
-    - name: Display passwords
-      debug:
-        var: item
-      with_items:
-        - "{{ elastic_password_variable }}"
-        - "{{ kibana_password_variable }}"
+# Extract passwords from the output
+elastic_password=$(echo "${passwords_output}" | grep '^PASSWORD elastic =' | awk '{print $4}')
+kibana_password=$(echo "${passwords_output}" | grep '^PASSWORD kibana =' | awk '{print $4}')
+logstash_password=$(echo "${passwords_output}" | grep '^PASSWORD logstash =' | awk '{print $4}')
+
+# Set environment variables
+export ELASTICSEARCH_USER="elastic"
+export ELASTICSEARCH_PASSWORD="${elastic_password}"
+
+export KIBANA_USER="kibana"
+export KIBANA_PASSWORD="${kibana_password}"
+
+export LOGSTASH_USER="logstash"
+export LOGSTASH_PASSWORD="${logstash_password}"
+
+# Display the generated passwords
+echo "Elasticsearch User: ${ELASTICSEARCH_USER}, Password: ${ELASTICSEARCH_PASSWORD}"
+echo "Kibana User: ${KIBANA_USER}, Password: ${KIBANA_PASSWORD}"
+echo "Logstash User: ${LOGSTASH_USER}, Password: ${LOGSTASH_PASSWORD}"
+
 
 
 
