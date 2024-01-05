@@ -1,31 +1,29 @@
 ---
-- name: Delete User and Associated Processes
-  hosts: your_target_hosts
-  become: yes  # Run tasks with elevated privileges
+- name: Generate Elasticsearch passwords
+  hosts: localhost
+  gather_facts: false
+  vars:
+    elasticsearch_home: "/path/to/your/elasticsearch"
+    elastic_password_variable: "elastic_password"
+    kibana_password_variable: "kibana_password"
 
   tasks:
-    - name: Identify processes using the user
-      shell: "pkill -u {{ username }}"
-      ignore_errors: yes  # Ignore errors if no processes are found
+    - name: Run elasticsearch-setup-passwords
+      command: "{{ elasticsearch_home }}/bin/elasticsearch-setup-passwords auto"
+      register: password_generation_output
 
-    - name: Wait for processes to terminate
-      async_status:
-        jid: "{{ item.ansible_job_id }}"
-      register: job_result
-      until: job_result.finished
-      retries: 5
-      delay: 5
-      loop: "{{ ansible_jobs.keys() | list }}"
+    - name: Extract passwords from output
+      set_fact:
+        {{ elastic_password_variable }}: "{{ password_generation_output.stdout_lines | regex_search('^PASSWORD elastic = (.+)$', '\\1') }}"
+        {{ kibana_password_variable }}: "{{ password_generation_output.stdout_lines | regex_search('^PASSWORD kibana = (.+)$', '\\1') }}"
 
-    - name: Switch to another user
-      become_user: other_username
-      command: echo "Switched to other user"
+    - name: Display passwords
+      debug:
+        var: item
+      with_items:
+        - "{{ elastic_password_variable }}"
+        - "{{ kibana_password_variable }}"
 
-    - name: Delete the user
-      user:
-        name: "{{ username }}"
-        state: absent
-        remove: yes
 
 
 To save the image of a running container
