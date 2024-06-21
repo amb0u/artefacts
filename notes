@@ -1,11 +1,28 @@
-<CORSConfiguration>
-    <Enabled>true</Enabled>
-    <AllowedOrigins>https://frontend.com</AllowedOrigins>
-    <AllowedMethods>GET,POST,HEAD,OPTIONS</AllowedMethods>
-    <AllowedHeaders>Authorization,Content-Type</AllowedHeaders>
-    <SupportsCredentials>true</SupportsCredentials>
-</CORSConfiguration>
-
+[cors]
+allow_origins = [
+    "https://frontend.com"
+]
+allow_methods = [
+    "GET",
+    "POST",
+    "HEAD",
+    "OPTIONS"
+]
+allow_headers = [
+    "Authorization",
+    "Content-Type",
+    "Accept",
+    "Origin",
+    "User-Agent",
+    "DNT",
+    "Cache-Control",
+    "X-Mx-ReqToken",
+    "Keep-Alive",
+    "X-Requested-With",
+    "If-Modified-Since",
+    "X-CSRF-Token"
+]
+allow_credentials = true
 
 
 [[apim.gateway.environment]]
