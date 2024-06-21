@@ -1,28 +1,26 @@
-[cors]
-allow_origins = [
-    "https://frontend.com"
-]
-allow_methods = [
-    "GET",
-    "POST",
-    "HEAD",
-    "OPTIONS"
-]
-allow_headers = [
-    "Authorization",
-    "Content-Type",
-    "Accept",
-    "Origin",
-    "User-Agent",
-    "DNT",
-    "Cache-Control",
-    "X-Mx-ReqToken",
-    "Keep-Alive",
-    "X-Requested-With",
-    "If-Modified-Since",
-    "X-CSRF-Token"
-]
-allow_credentials = true
+    <filter>
+        <filter-name>CORS</filter-name>
+        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+        <init-param>
+            <param-name>cors.allowOrigin</param-name>
+            <param-value>https://localhost:9000, https://localhost:9001</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.supportedMethods</param-name>
+            <param-value>GET, HEAD, POST, DELETE, OPTIONS, PATCH, PUT</param-value>
+        </init-param>
+        <init-param>
+                   <param-name>cors.exposedHeaders</param-name>
+                   <param-value>Location</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 
 
 [[apim.gateway.environment]]
