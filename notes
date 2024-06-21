@@ -1,3 +1,14 @@
+<Valve className="org.apache.catalina.filters.CorsFilter"
+       cors.allowed.origins="https://frontend.com"
+       cors.allowed.methods="GET,POST,HEAD,OPTIONS"
+       cors.allowed.headers="Authorization,Content-Type"
+       cors.exposed.headers=""
+       cors.support.credentials="true"
+       cors.preflight.maxage="1800"
+       cors.logging.enabled="true" />
+
+
+
 [[apim.gateway.environment]]
 name = "env1"
 type = "production"
