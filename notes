@@ -1,11 +1,10 @@
-<Valve className="org.apache.catalina.filters.CorsFilter"
-       cors.allowed.origins="https://frontend.com"
-       cors.allowed.methods="GET,POST,HEAD,OPTIONS"
-       cors.allowed.headers="Authorization,Content-Type"
-       cors.exposed.headers=""
-       cors.support.credentials="true"
-       cors.preflight.maxage="1800"
-       cors.logging.enabled="true" />
+<CORSConfiguration>
+    <Enabled>true</Enabled>
+    <AllowedOrigins>https://frontend.com</AllowedOrigins>
+    <AllowedMethods>GET,POST,HEAD,OPTIONS</AllowedMethods>
+    <AllowedHeaders>Authorization,Content-Type</AllowedHeaders>
+    <SupportsCredentials>true</SupportsCredentials>
+</CORSConfiguration>
 
 
 
